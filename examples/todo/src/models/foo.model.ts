@@ -1,14 +1,16 @@
-import {model, property} from '@loopback/repository';
+import {Entity, hasOne, model, property} from '@loopback/repository';
 import {Bar} from './bar.model';
 
 @model()
-export class Foo {
+export class Foo extends Entity {
   @property()
   name?: string;
 
   // comment out the following two lines to make the app start
-  @property({type: Bar})
+  @hasOne(() => Bar)
   bar?: Bar;
 
-  constructor(data?: Partial<Foo>) {}
+  constructor(data?: Partial<Foo>) {
+    super(data);
+  }
 }
